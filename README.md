@@ -48,3 +48,5 @@ Necesitamos desarrollar un programa de consola para un restaurant que quiere ten
 - Después de realizarse cualquier acción, deberá de mostrar nuevamente el menú principal, hasta que el usuario desee salir.
 
 - Se recomienda el uso de funciones para modularizar el desarrollo.
+
+- Nombre del archivo: `restaurant.py`
