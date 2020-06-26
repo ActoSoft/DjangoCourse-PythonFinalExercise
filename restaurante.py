@@ -1,3 +1,5 @@
+import time
+
 global dishes
 dishes = []
 
@@ -58,82 +60,84 @@ def create_dish():
 
 
 def print_dishes():
-    try:
+    if dishes == []:
+        print('No hay platillos disponibles, agrega un platillo')
+            
+    else:    
         for dish in dishes:
-        
             print (f'Platillo: {dish.name}. Descripción: {dish.description}. Inversión: ${dish.investment} MXN'
             f' Venta al público: ${dish.sell} MXN. Ingredientes: {dish.recipe}.'
             f' Tiempo de preparación: {dish.time}. Calorías en alimento: {dish.kcal}')
+            print(f'----------Hasta aquí es el menú para el platillo: {dish.name}--------')
     
-    except AttributeError:
-        print('----------Hasta aquí es el menú--------')
-
 def get_dish():
-    
-    user_dish = input('Ingresa el platillo  a buscar: ')
-    for dish in dishes:
+    if dishes == []:
+            print('No hay platillos disponibles, agrega un platillo')
+            
+    else: 
+        user_dish = input('Ingresa el platillo  a buscar: ')
+        for dish in dishes:
 
-        if user_dish in dish.name:
-
-            print (f'Platillo: {dish.name}. Descripción: {dish.description}. Inversión: ${dish.investment} MXN'
-                f'Venta al público: ${dish.sell} MXN. Ingredientes: {dish.recipe}.'
-                f'Tiempo de preparación: {dish.time}. Calorías en alimento: {dish.kcal}')
+            if user_dish in dish.name:
+                print (f'Platillo: {dish.name}. Descripción: {dish.description}. Inversión: ${dish.investment} MXN'
+                    f'Venta al público: ${dish.sell} MXN. Ingredientes: {dish.recipe}.'
+                    f'Tiempo de preparación: {dish.time}. Calorías en alimento: {dish.kcal}')
         
-        else:
-
-            print('No existe el platillo en el sistema')
+            else: 
+                print('No hay platillo existente con ese nombre')
+def edit_dish(): 
+    if dishes == []:
+            print('No hay platillos disponibles, agrega un platillo')
     
-       
+    else: 
+        user_dish = input('Ingresa el platillo  a editar: ')
 
-def edit_dish():
-    user_dish = input('Ingresa el platillo  a editar: ')
+        for dish in dishes:
+            if user_dish in dish.name:
+                user_edit = int(input('¿Qué apartado desea editar?'
+                '1. Descripcion 2. Inversion 3. Venta 4. Ingredientes'
+                '5. Tiempo 6. Calorias: '))
 
-    for dish in dishes:
-        if user_dish in dish.name:
-            user_edit = int(input('¿Qué apartado desea editar?'
-            '1. Descripcion 2. Inversion 3. Venta 4.Ingredientes'
-            '5.Tiempo 6.Calorias: '))
-
-            if user_edit == 1:
-                user_descript = input('Ingresa la nueva descripción: ')
-                dish.description = user_descript
-                print('Cambio exitoso')
+                if user_edit == 1:
+                    user_descript = input('Ingresa la nueva descripción: ')
+                    dish.description = user_descript
+                    print('Cambio exitoso')
         
-            elif user_edit == 2:
-                user_invest = input('Ingresa la nueva inversión: ')
-                dish.investment = user_invest
-                print('Cambio exitoso')
+                elif user_edit == 2:
+                    user_invest = input('Ingresa la nueva inversión: ')
+                    dish.investment = user_invest
+                    print('Cambio exitoso')
 
-            elif user_edit == 3:
-                user_sell = input('Ingresa el nuevo precio al público: ')
-                dish.sell = user_sell
-                print('Cambio exitoso')
+                elif user_edit == 3:
+                    user_sell = input('Ingresa el nuevo precio al público: ')
+                    dish.sell = user_sell
+                    print('Cambio exitoso')
 
-            elif user_edit == 4:
-                user_recipe = input('Ingresa los ingredientes: ')
-                dish.recipe = user_recipe
-                print('Cambio exitoso')
+                elif user_edit == 4:
+                    user_recipe = input('Ingresa los ingredientes: ')
+                    dish.recipe = user_recipe
+                    print('Cambio exitoso')
 
-            elif user_edit == 5:
-                user_time = input('Ingresa el nuevo tiempo: ')
-                dish.time = user_time
-                print('Cambio exitoso')
+                elif user_edit == 5:
+                    user_time = input('Ingresa el nuevo tiempo: ')
+                    dish.time = user_time
+                    print('Cambio exitoso')
 
-            elif user_edit == 6:
-                user_kcal = input('Ingresa las nuevas calorías: ')
-                dish.kcal = user_kcal
-                print('Cambio exitoso')
-            else:
-                print('Esa opción no se encuentra disponible')
+                elif user_edit == 6:
+                    user_kcal = input('Ingresa las nuevas calorías: ')
+                    dish.kcal = user_kcal
+                    print('Cambio exitoso')
+                else:
+                    print('Esa opción no se encuentra disponible')
             
     
     
 def erase_dish():
     user_dish = input('Ingresa el platillo  a eliminar: ')
-    for dish in dishes:
-        if user_dish in dish.name:
-            del dish.name
-            del dish.description
+    for i, dish in enumerate(dishes):
+        if dish.name == user_dish:
+            del dishes[i]
+            
             print('Se ha borrado con éxito')
         
         else: 
@@ -142,11 +146,13 @@ def erase_dish():
 
 
 def menu():
-    print(" Seleciona las siguientes opciones\n 1. Ver platillos disonibles\n 2. Buscar platillos por nombre\n 3. Crear nuevo platillo\n 4. Editar platillo existente\n 5. Eliminar platillo\n 6. Salir del programa\n")
+    print('Seleciona las siguientes opciones:\n 1. Ver platillos disponibles\n' 
+            ' 2. Buscar platillos por nombre\n 3. Crear nuevo platillo\n' 
+            ' 4. Editar platillo existente\n 5. Eliminar platillo\n 6. Salir del programa\n')
     user = int(input("Selecciona tu opción [1-6]: "))
     
     while user != 6:
-        print(" Seleciona las siguientes opciones\n 1. Ver platillos disonibles\n 2. Buscar platillos por nombre\n 3. Crear nuevo platillo\n 4. Editar platillo existente\n 5. Eliminar platillo\n 6. Salir del programa\n")
+
         if user == 1:
             print_dishes()
         elif user == 2:
@@ -160,6 +166,11 @@ def menu():
 
         elif user == 5:
             erase_dish()
+
+        time.sleep(3)
+        print('Seleciona las siguientes opciones:\n 1. Ver platillos disponibles\n' 
+            ' 2. Buscar platillos por nombre\n 3. Crear nuevo platillo\n' 
+            ' 4. Editar platillo existente\n 5. Eliminar platillo\n 6. Salir del programa\n')
         
         user = int(input("Selecciona tu opción [1-6]: "))
 
